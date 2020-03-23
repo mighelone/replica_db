@@ -43,6 +43,25 @@ object RunJdbcExample extends App {
     println(values)
 
     val statement = connection.prepareStatement(command)
+
+    // http://www.java2s.com/Code/Java/Database-SQL-JDBC/GetColumnType.htm
+    val meta = connection.getMetaData();
+    val rsColumns = meta.getColumns(null, null, "users", null)
+    
+    // while (rsColumns.next()) {
+    //     val columnName = rsColumns.getString("COLUMN_NAME")
+    //     val columnType = rsColumns.getString("TYPE_NAME")
+    //     println(s"$columnName:$columnType")
+    // }
+
+    // https://stackoverflow.com/a/47116239/6765102
+    val mapColumns = Iterator
+        .continually(rsColumns.next)
+        .takeWhile(identity)
+        .map { _ => rsColumns.getString("COLUMN_NAME") -> rsColumns.getString("TYPE_NAME") }
+        .toMap
+    println(mapColumns)
+    // println(schema)
     var counter = 1
     values.foreach{
         x =>
