@@ -17,11 +17,12 @@ object Maxwell {
     
         val keyString = s"(${data.keys.mkString(", ")})"
         val placeHolder = s"(${List.fill(data.keys.toList.length)("?").mkString(", ")})"
+
         val command = s"""INSERT INTO $database.$table
         $keyString
         VALUES $placeHolder
         """
-        val values = data.values.map(_.toString()).toList
+        val values = data.values.map(_.toString().replace("\"", "")).toList
         (command, values)
     }
 
