@@ -12,6 +12,7 @@ libraryDependencies ++= Seq(
   "ch.qos.logback" % "logback-classic" % "1.2.3",
   "mysql" % "mysql-connector-java" % "8.0.19",
   "com.typesafe.play" %% "play-json" % "2.6.14",
+  "com.github.scopt" %% "scopt" % "4.0.0-RC2",
   "org.scalactic" %% "scalactic" % "3.1.1",
   "org.scalatest" %% "scalatest" % "3.1.1" % "test"
 )
